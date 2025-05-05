@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="UTF-8"/><title>Book - Seats</title></head>
+<body>
+  <h1>Chọn ghế: <span th:text="${showtime.time}"></span></h1>
+  <div th:text="${message}"></div>
+  <table border="1">
+    <tr><th>Ghế</th><th>Status</th><th>Action</th></tr>
+    <tr th:each="s : ${seats}">
+      <td th:text="${s.seatNumber}"></td>
+      <td th:text="${s.available} ? 'Trống' : 'Đã đặt'"></td>
+      <td>
+        <form th:if="${s.available}"
+              th:action="@{/book/{showId}(showId=${showtime.id})}"
+              method="post">
+          <input type="hidden" name="seatNumber" th:value="${s.seatNumber}"/>
+          <button>Đặt</button>
+        </form>
+        <form th:if="${!s.available}"
+              th:action="@{/book/{showId}(showId=${showtime.id})}"
+              method="post">
+          <input type="hidden" name="seatNumber" th:value="${s.seatNumber}"/>
+          <button>Hủy</button>
+        </form>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>

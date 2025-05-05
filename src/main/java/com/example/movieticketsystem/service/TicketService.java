@@ -5,16 +5,22 @@ import java.util.concurrent.locks.ReentrantLock;
 
 public class TicketService {
     private final ReentrantLock lock = new ReentrantLock();
+
     public boolean reserveSeat(Seat seat) {
-    lock.lock();
-    try {
-        if (seat.isAvailable()) {
-        seat.reserve(); // Đánh dấu ghế là đã bán
-        return true;
-    }
-    return false;
+        lock.lock();
+        try {
+            return seat.reserve();
         } finally {
-        lock.unlock();
+            lock.unlock();
+        }
+    }
+
+    public boolean cancelSeat(Seat seat) {
+        lock.lock();
+        try {
+            return seat.cancel();
+        } finally {
+            lock.unlock();
         }
     }
 }

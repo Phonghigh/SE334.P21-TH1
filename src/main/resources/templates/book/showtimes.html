@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Chọn suất chiếu</title>
+</head>
+<body>
+<h1>Chọn suất chiếu</h1>
+<ul>
+    <li th:each="show : ${showtimes}">
+        <a th:href="@{'/book/' + ${show.id}}">
+            <span th:text="${show.movie.title}">Tên phim</span> -
+            <span th:text="${show.time}">Thời gian</span>
+        </a>
+    </li>
+</ul>
+</body>
+</html>

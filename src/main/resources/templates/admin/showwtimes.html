@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="UTF-8"/><title>Admin - ShowTimes</title></head>
+<body>
+  <h1>Quản lý suất chiếu</h1>
+  <form th:action="@{/admin/showtimes}" method="post">
+    Movie:
+    <select name="movieId" th:each="m : ${movies}" th:value="${m.id}" th:text="${m.title}"></select>
+    Time (ISO): <input name="time"/> 
+    Seats: <input name="seats"/>
+    <button type="submit">Add</button>
+  </form>
+  <table border="1">
+    <tr><th>ID</th><th>Movie ID</th><th>Time</th><th>Seats</th><th>Action</th></tr>
+    <tr th:each="s : ${showtimes}">
+      <td th:text="${s.id}"></td>
+      <td th:text="${s.movieId}"></td>
+      <td th:text="${s.time}"></td>
+      <td th:text="${s.totalSeats}"></td>
+      <td>
+        <form th:action="@{/admin/showtimes/delete}" method="post">
+          <input type="hidden" name="id" th:value="${s.id}"/>
+          <button>Del</button>
+        </form>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="UTF-8"/><title>Admin - Movies</title></head>
+<body>
+  <h1>Quản lý phim</h1>
+  <form th:action="@{/admin/movies}" method="post">
+    Title: <input name="title"/> 
+    Genre: <input name="genre"/> 
+    Price: <input name="price"/>
+    <button type="submit">Add</button>
+  </form>
+  <table border="1">
+    <tr><th>ID</th><th>Title</th><th>Genre</th><th>Price</th><th>Action</th></tr>
+    <tr th:each="m : ${movies}">
+      <td th:text="${m.id}"></td>
+      <td th:text="${m.title}"></td>
+      <td th:text="${m.genre}"></td>
+      <td th:text="${m.ticketPrice}"></td>
+      <td>
+        <form th:action="@{/admin/movies/delete}" method="post">
+          <input type="hidden" name="id" th:value="${m.id}"/>
+          <button>Del</button>
+        </form>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>

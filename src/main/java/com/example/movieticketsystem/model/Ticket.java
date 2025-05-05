@@ -5,14 +5,10 @@ public class Ticket {
     private Seat seat;
 
     public Ticket(Movie movie, Seat seat) {
-    this.movie = movie;
-    this.seat = seat;
-    }
-    public Movie getMovie() {
-    return movie;
-    }
-    public Seat getSeat() {
-    return seat;
+        this.movie = movie;
+        this.seat = seat;
     }
 
+    public Movie getMovie() { return movie; }
+    public Seat getSeat() { return seat; }
 }
